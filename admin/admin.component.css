@@ -1,0 +1,158 @@
+.admin-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  padding-top:50px;
+}
+
+h2 {
+  color: #343a40;
+  margin-bottom: 10px;
+}
+.hello{
+    text-align: center;
+}
+
+p {
+  color: #6c757d;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  gap: 30px;
+}
+
+button {
+  padding: 10px 15px;
+  width: 1000px;
+  font-size: 16px;
+  /* background-color: #007bff; */
+  color: black;
+  border: 1px solid skyblue;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #f3e1ba;
+}
+.page-content {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.page-content h3 {
+  color: #007bff;
+}
+
+.page-content p {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+
+/* General Body and Container Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Filter Section Styles */
+.filters {
+    width: 100%; /* Full width */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px; /* Add spacing between filters and car listings */
+}
+
+.filters .form-group {
+    margin-bottom: 15px;
+}
+
+/* Car Listing Section */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Align to the left on medium screens */
+}
+
+.car-card {
+    width: 30%; /* Three items per row on larger screens */
+    background-color: white;
+    padding: 10px;  /* Reduced padding for smaller image box */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.car-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.car-card .form-group {
+    margin-bottom: 10px;
+}
+
+/* Button Styles */
+button.btn {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .filters {
+        width: 100%; /* Filters will take full width on medium screens */
+        margin-bottom: 20px;
+    }
+
+    .car-card {
+        width: 48%; /* Two items per row on medium screens */
+        margin-right: 4%; /* Adjust gap between items */
+    }
+
+    .car-card:last-child {
+        margin-right: 0; /* No gap after the last item */
+    }
+}
+
+@media (max-width: 480px) {
+    .car-card {
+        width: 100%; /* One item per row on small screens */
+    }
+}
+button.btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

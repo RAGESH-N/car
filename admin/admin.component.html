@@ -1,0 +1,112 @@
+<div class="admin-container">
+  <h2>Admin Dashboard</h2>
+  <p>Welcome, Admin! Choose an option below:</p>
+
+  <div class="button-container">
+    <button (click)="setPage('manage')">Manage Admin</button>
+    <button (click)="setPage('viewRentals')">View Rentals</button>
+    <button (click)="setPage('userHistory')">User History</button>
+  </div>
+</div>
+
+<div class="page-content">
+  <div *ngIf="currentPage === 'manage'">
+    <h3 class="hello">Manage Admin</h3>
+    <div class="row">
+      <div class="car-card" *ngFor="let car of cars">
+        <div *ngIf="editingCarId === car._id; else viewMode">
+        <!-- Edit Mode -->
+         <img style="width: 520px; height: 300px;" [src]="car.image" alt="Car image">
+        <div class="form-group">
+          <label for="name-{{ car._id }}">Name:</label>
+          <input
+            type="text"
+            id="name-{{ car._id }}"
+            [(ngModel)]="car.name"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="model-{{ car._id }}">Model:</label>
+          <input
+            type="text"
+            id="model-{{ car._id }}"
+            [(ngModel)]="car.model"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="details-{{ car._id }}">Details:</label>
+          <input
+            type="text"
+            id="details-{{ car._id }}"
+            [(ngModel)]="car.details"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="details-{{ car._id }}">pricePerKm:</label>
+          <input
+            type="number"
+            id="details-{{ car._id }}"
+            [(ngModel)]="car.rentalDetails.pricePerKm"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="details-{{ car._id }}">  discount:</label>
+          <input
+            type="text"
+            id="details-{{ car._id }}"
+            [(ngModel)]="car.rentalDetails.discount"
+            class="form-control"
+          />
+        </div>
+        <button  (click)="saveCar(car)">Save</button>
+        <button  (click)="cancelEdit()">Cancel</button>
+      </div>
+      <ng-template #viewMode>
+        <!-- View Mode -->
+         <img style="width: 520px; height: 300px;" [src]="car.image" alt="Car image">
+        <p>Name: {{ car.name }}</p>
+        <p>Model: {{ car.model }}</p>
+        <p>Details: {{ car.details }}</p>
+        <p>pricePerKm:{{car.rentalDetails.pricePerKm}}</p>
+        <p>discount:{{car.rentalDetails.discount}}</p>
+        <button  (click)="enableEdit(car._id)">Edit</button>
+        <button  (click)="deleteCar(car._id)">Delete</button>
+      </ng-template>
+    </div>
+  </div>
+      </div>
+    </div>
+
+  <div *ngIf="currentPage === 'viewRentals'">
+    <h3>View Rentals</h3>
+    <p>Here you can view all rental details and ongoing bookings.</p>
+    <table class="rentals-table">
+        <thead>
+        <tr>
+            <th>Car Name</th>
+            <th>Rental Date</th>
+            <th>Return Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let rental of previousRentals">
+            <td>{{ rental.carName }}</td>
+            <td>{{ rental.rentalDate }}</td>
+            <td>{{ rental.returnDate }}</td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="currentPage === 'userHistory'">
+    <h3>User History</h3>
+    <p>Here you can view the history of users and their activities.</p>
+  </div>
+
+
+
+
