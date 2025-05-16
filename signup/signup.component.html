@@ -1,0 +1,42 @@
+<h1 style="text-align: center;">Register Here</h1>
+<div class="form-container">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Name" formControlName="name" required>
+    <input type="tel" placeholder="Mobile No" formControlName="mobile" required>
+    <input type="email" placeholder="Email ID" formControlName="email" required>
+    <div *ngIf="signupForm.get('email')?.touched">
+      <small *ngIf="signupForm.get('email')?.hasError('pattern')" style="color: red;">
+        Not a Valid Email
+      </small>
+    </div>
+    <input type="password" placeholder="Password" formControlName="password" required>
+    <small *ngIf="signupForm.get('password')?.hasError('pattern')">
+      <div [style.color]="hasMinLength ? 'green' : 'red'">*Enter at least 8-12 characters</div>
+      <div [style.color]="hasUppercase ? 'green' : 'red'">*Should consist of an uppercase</div>
+      <div [style.color]="hasAlphanumeric ? 'green' : 'red'">*Should consist alphanumeric</div>
+      <div [style.color]="hasSpecialChar ? 'green' : 'red'">*Should consist special char (!"&#64;"#$%^&*)</div>
+    </small>
+    <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" required>
+    <small *ngIf="hasPasswordMismatch" style="color: red;">Passwords do not match!</small>
+    <input type="text" placeholder="Favourites (comma separated)" formControlName="favourites">
+
+    <div class="captcha">Captcha: <span>{{captcha}}</span>
+      <button type="button" (click)="refreshCaptcha()" class="refresh">
+        <img src="assets/reload.png" alt="reload">
+      </button>
+    </div>
+    <input type="text" placeholder="Enter Captcha" formControlName="captchaInput" required>
+    <small *ngIf="hasCaptchaMismatch" style="color: red;">Captcha is incorrect. Please try again.</small>
+    <button type="submit" [disabled]="signupForm.invalid">Signup</button>
+  </form>
+  <p>Already existing User? <a routerLink="/login">Login</a></p>
+</div>
+
+<!-- Popup Modal -->
+<div class="popup" *ngIf="showErrorPopup">
+  <div class="popup-content">
+    <h2>Error</h2>
+    <p>{{ errorMessage }}</p>
+    <button (click)="closePopup()">Close</button>
+  </div>
+</div>
