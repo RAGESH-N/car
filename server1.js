@@ -162,6 +162,28 @@ app.post('/forget-password', async (req, res) => {
   }
 });
 
+
+// Admin Schema and Model (new)
+const adminSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
+const Admin = mongoose.model('Admin', adminSchema);
+
+// Admin Login Endpoint
+app.post('/admin-login', async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) return res.status(400).json({ error: 'Both fields are required' });
+  try {
+    const admin = await Admin.findOne({ email });
+    if (!admin) return res.status(404).json({ error: 'Admin not found' });
+    if (admin.password !== password) return res.status(401).json({ error: 'Invalid password' });
+    res.status(200).json({ message: 'Login successful', admin: { email: admin.email } });
+  } catch (err) {
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
